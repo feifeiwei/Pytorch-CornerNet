@@ -18,10 +18,6 @@ class network(torch.nn.Module):
         self.n_depth = 4
         self.classes = 10
         
-        self.pull_weight = pull_weight
-        self.push_weight = push_weight
-        self.offset_weight = offset_weight
-        
         self.criterion = mul_task_loss(pull_weight, push_weight,offset_weight)
         self.model = corner_net(self.classes,num_res=self.n_res)
         self.optimizer = optim.SGD(self.model.parameters(), lr=lr, momentum=0.9, weight_decay=5e-4)
