@@ -33,7 +33,7 @@ else:
 
 # Data
 print('==> Preparing data...')
-root = r'E:\遥感数据集\NWPU_VHR-10_dataset\yolo_label.txt'
+root = r'E:\datasets\NWPU_VHR-10_dataset\train.txt'
 
 transform = transforms.Compose([
                                 transforms.ToTensor(),
