@@ -8,7 +8,7 @@ import torch.nn as nn
 from .layers import Residual, conv_bn, conv_bn_relu, conv_relu
 from .corner_pooling import top_pool, left_pool,bottom_pool, right_pool
 
-class Hourglass(nn.Module): ###不改变特征图尺寸与深度
+class Hourglass(nn.Module): 
     def __init__(self, depth, nFeat, num_res=5, resBlock=Residual):
         super(Hourglass,self).__init__()
         self.depth = depth
@@ -85,11 +85,11 @@ class HourglassNet(nn.Module):
         # head
         x = self.conv1(x)
         x = self.bn1(x)
-        x = self.relu(x)# ?,64,128,128
+        x = self.relu(x)
         
         x = self.res1(x)
         x = self.pool(x)
-        x = self.res2(x)# ?,128,64,64
+        x = self.res2(x)
         x = self.res3(x)
         
         x = self.out(x)
@@ -128,9 +128,9 @@ class corner_net(nn.Module):
         
         ##bottem-right
         i = self.conv_bn_relu(x)
-        i = bottom_pool()(i) ## cornerpooling
+        i = bottom_pool()(i) 
         j = self.conv_bn_relu(x)
-        j = right_pool()(j) ## cornerpooling
+        j = right_pool()(j)
         ij = self.conv_bn(i+j)
         k = self.conv_bn_1x1(x)
         out = self.conv_bn_relu(self.relu(k+ij))

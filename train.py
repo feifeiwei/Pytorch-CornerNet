@@ -11,7 +11,6 @@ import torchvision.transforms as transforms
 from Network import network
 from datasets.datasets import ListDataset
 
-
 parser = argparse.ArgumentParser(description='PyTorch cornernet Training')
 parser.add_argument('--lr', default=1e-3, type=float, help='learning rate')
 parser.add_argument('--image_shape', type=int, default=511, help='shape of each input image')
