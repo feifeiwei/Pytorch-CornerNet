@@ -8,7 +8,6 @@ Created on Wed Dec 12 16:00:16 2018
 import torch
 from .utils import comp
 
-
 class left_pool(torch.autograd.Function):
     
     def forward(self, input_):

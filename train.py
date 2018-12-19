@@ -30,7 +30,6 @@ else:
     best_loss = float('inf')
     start_epoch = 0
 
-
 # Data
 print('==> Preparing data...')
 root = r'E:\datasets\NWPU_VHR-10_dataset\train.txt'

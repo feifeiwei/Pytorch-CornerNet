@@ -18,7 +18,7 @@ class Hourglass(nn.Module): ###不改变特征图尺寸与深度
 
         self.hg = self._make_hour_glass()
         self.downsample = nn.MaxPool2d(2, 2)
-        self.upsample = nn.Upsample(scale_factor=2, mode='nearest')
+        self.upsample = nn.Upsample(scale_factor=2, mode='nearest',align_corners=True)
         
     def _make_residual(self, n):
         return nn.Sequential(*[self.resBlock(self.nFeat, self.nFeat) for _ in range(n)])
