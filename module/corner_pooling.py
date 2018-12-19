@@ -6,7 +6,7 @@ Created on Wed Dec 12 16:00:16 2018
 """
 
 import torch
-from utils import comp
+from .utils import comp
 
 
 class left_pool(torch.autograd.Function):
@@ -200,15 +200,4 @@ class bottom_pool(torch.autograd.Function):
             res.select(2,idx).copy_(com_tmp)
         return res
 
-
-if __name__=="__main__":
-    x = torch.randn(1,1,3,3)
-    g = torch.arange(0,9).view_as(x).float()
-    x.requires_grad=True
-    g.requires_grad=True
-    lp = bottom_pool()
-    
-    y = lp(x)
-    y.backward(g)
-    
     

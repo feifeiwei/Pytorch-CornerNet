@@ -37,7 +37,7 @@ root = r'E:\datasets\NWPU_VHR-10_dataset\train.txt'
 
 transform = transforms.Compose([
                                 transforms.ToTensor(),
-                                transforms.Normalize((0.485,0.456,0.406), (0.228,0.224,0.225))
+                                transforms.Normalize((0.485,0.456,0.406), (0.229,0.224,0.225))
                             ])
 dataset = ListDataset(root,img_size=args.image_shape, fmp_size=128, classes=10, train=True,transform=transform)
 trainloader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=True,collate_fn=dataset.collate_fn)
