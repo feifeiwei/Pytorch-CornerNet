@@ -66,7 +66,7 @@ class mul_task_loss(object):
         num  = num.unsqueeze(2).expand_as(mask)
         
         num2 = (num - 1) * num
-      	m = 2.
+      	m = 2
       	
         dist = tag_mean.unsqueeze(1) - tag_mean.unsqueeze(2)
         dist = m - torch.abs(dist)
