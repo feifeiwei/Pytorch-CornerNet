@@ -66,11 +66,12 @@ class mul_task_loss(object):
         num  = num.unsqueeze(2).expand_as(mask)
         
         num2 = (num - 1) * num
-      
+      	m = 2
+      	
         dist = tag_mean.unsqueeze(1) - tag_mean.unsqueeze(2)
-        dist = 1 - torch.abs(dist)
+        dist = m - torch.abs(dist)
         dist = nn.functional.relu(dist, inplace=True)
-        dist = dist - 1 / (num + 1e-4)
+        dist = dist - m / (num + 1e-4)
         dist = dist / (num2 + 1e-4)  
         dist = dist[mask]
         push = dist.sum()
