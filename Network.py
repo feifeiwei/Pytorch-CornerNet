@@ -29,7 +29,7 @@ class network(torch.nn.Module):
         if resume:
             print('==> Resuming from checkpoint..')
             checkpoint = torch.load('./checkpoint/ckpt.pth')
-            self.model.load_state_dict(checkpoint['net'])
+            self.model.load_state_dict(checkpoint['weights'])
 
         else:
             print("==> Random init model...")
