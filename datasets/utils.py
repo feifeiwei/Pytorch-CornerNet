@@ -2,8 +2,6 @@
 """
 Created on Tue Dec  4 16:22:49 2018
 
-list img_path class xmin ymin xmax ymax xmin ymin xmax ymax .......
-
 @author: 60236
 """
 import numpy as np

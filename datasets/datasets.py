@@ -2,7 +2,7 @@
 """
 Created on Tue Dec  4 16:22:49 2018
 
-list format: img_path xmin ymin xmax ymax class xmin ymin xmax ymax  class.......
+list format:img_path xmin ymin xmax ymax class xmin ymin xmax ymax  class.......
 
 @author: 60236
 """
