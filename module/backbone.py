@@ -94,7 +94,6 @@ class ResNet(nn.Module):
         
         x = self.latlayer1(c)  #256,4,4
         x = self._upsample_add(x,self.latlayer2(b))
-        x = self._upsample_add(x,self.latlayer3(a))
         
         return x
      
