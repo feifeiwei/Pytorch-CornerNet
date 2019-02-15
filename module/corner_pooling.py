@@ -199,16 +199,5 @@ class bottom_pool(torch.autograd.Function):
             com_tmp = comp(input_tmp,output_tmp,grad_output_tmp,res_tmp)
             res.select(2,idx).copy_(com_tmp)
         return res
-
-
-if __name__=="__main__":
-    x = torch.randn(1,1,3,3)
-    g = torch.arange(0,9).view_as(x).float()
-    x.requires_grad=True
-    g.requires_grad=True
-    lp = bottom_pool()
-    
-    y = lp(x)
-    y.backward(g)
     
     

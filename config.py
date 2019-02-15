@@ -13,9 +13,11 @@ config = {
         'push_weight':0.1, 
         'offset_weight':1,    
         
-        'num_classes':10,
+        'num_classes':2,
         
         'save_dir':r'./checkpoint/ckpt.pth',
         
-        'train_root':'E:\遥感数据集\NWPU_VHR-10_dataset\yolo_label.txt',
+        'train_root': r'E:\遥感车辆数据集\UCAS\test.txt',
+        'pretrained_weight_path':r'/home/weimf/cornernet/script/net_cls_1.pth',
+        'gpu_ids':[0,1,2,3],
         }
