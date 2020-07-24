@@ -90,12 +90,12 @@ class ResNet(nn.Module):
         out = self.layer1(out) #?,2048,4,4
         a = self.layer2(out) #?,512,16,16
         b = self.layer3(a) #?,1024,8,8
-        c = self.layer4(b) #?,2048,4,4
+        #c = self.layer4(b) #?,2048,4,4
         
-        x = self.latlayer1(c)  #256,4,4
-        x = self._upsample_add(x,self.latlayer2(b))
+        # x = self.latlayer1(c)  #256,4,4
+        # x = self._upsample_add(x,self.latlayer2(b))
         
-        return x
+        return b
      
 
 def ResNet18():
@@ -115,8 +115,7 @@ def ResNet152():
 
 
 def test():
-    net = ResNet50()
-    y = net(torch.randn(1,3,32,32))
+    net = ResNet18()
+    y = net(torch.randn(1,3,416,416))
     print(y.shape)
     
-#test()

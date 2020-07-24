@@ -11,6 +11,7 @@ from .utils import comp
 
 class left_pool(torch.autograd.Function):
     
+    @staticmethod
     def forward(self, input_):
         self.save_for_backward(input_.clone())
         output = torch.zeros_like(input_)
@@ -59,6 +60,7 @@ class left_pool(torch.autograd.Function):
         return res
     
 class right_pool(torch.autograd.Function):
+    @staticmethod
     def forward(self, input_):
         self.save_for_backward(input_)
         
@@ -108,7 +110,7 @@ class right_pool(torch.autograd.Function):
             
 
 class top_pool(torch.autograd.Function):
-    
+    @staticmethod
     def forward(self, input_):
         self.save_for_backward(input_)
         output = torch.zeros_like(input_)
@@ -155,6 +157,7 @@ class top_pool(torch.autograd.Function):
         return res
     
 class bottom_pool(torch.autograd.Function):
+    @staticmethod
     def forward(self, input_):
         self.save_for_backward(input_)
         output = torch.zeros_like(input_)

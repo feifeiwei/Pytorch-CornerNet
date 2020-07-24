@@ -6,6 +6,7 @@ list format:img_path xmin ymin xmax ymax class xmin ymin xmax ymax  class.......
 
 @author: 60236
 """
+import os
 import math
 import glob
 import numpy as np
@@ -16,13 +17,14 @@ from .utils import draw_gaussian, gaussian_radius
 from .augmentation import random_crop,random_flip,resize
 
 class ListDataset(torch.utils.data.Dataset):
-    def __init__(self,list_path, img_size=511, fmp_size=128, classes=80, train=True, transform=None):
+    def __init__(self,root, list_path, img_size=511, fmp_size=128, classes=80, train=True, transform=None):
         
         self.fmp_size  =  fmp_size
         self.transform =  transform
         self.img_size  =  img_size
         self.classes   =  classes
         self.train = train
+        self.root = root
         
         self.gaussian_rad = -1
         self.gaussian_apply = True
@@ -55,7 +57,7 @@ class ListDataset(torch.utils.data.Dataset):
             self.labels.append(torch.LongTensor(label))
     
     def __getitem__(self,idx):
-        img = Image.open(self.img_path[idx])
+        img = Image.open(os.path.join(self.root, self.img_path[idx]))
         if img.mode != 'RGB':
             img = img.convert('RGB')
         boxes = self.boxes[idx].clone()

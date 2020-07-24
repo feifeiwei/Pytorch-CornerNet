@@ -48,8 +48,13 @@ class mul_task_loss(object):
                 loss = loss - neg_loss
             else:
                 loss = loss - (pos_loss + neg_loss) /(num_pos)
-        return loss
 
+            #print(torch.isnan(loss))
+            if torch.isnan(loss):
+            	import pdb
+            	pdb.set_trace()
+
+        return loss
 
     def ae_loss(self, tag0, tag1, masks):
         num  = masks.sum(dim=1, keepdim=True).unsqueeze(1).expand_as(tag0)
@@ -61,20 +66,26 @@ class mul_task_loss(object):
         tag1 = torch.pow(tag1 - tag_mean, 2) / (num + 1e-4)
         tag1 = (tag1*masks).sum()
         pull = tag0 + tag1
+        
         mask = masks.unsqueeze(1) + masks.unsqueeze(2)
+        eye = torch.eye(100,100).unsqueeze(2).expand_as(mask).to(mask.device)
+        mask = mask - eye
         mask = mask.eq(2)
         num  = num.unsqueeze(2).expand_as(mask)
+
         
         num2 = (num - 1) * num
-      	m = 2
+        
+        m=1
       	
         dist = tag_mean.unsqueeze(1) - tag_mean.unsqueeze(2)
         dist = m - torch.abs(dist)
         dist = nn.functional.relu(dist, inplace=True)
-        dist = dist - m / (num + 1e-4)
+        #dist = dist - m / (num + 1e-4)
         dist = dist / (num2 + 1e-4)  
         dist = dist[mask]
         push = dist.sum()
+        
         return pull, push
     
     def __call__(self, outpus, targets):
@@ -96,7 +107,6 @@ class mul_task_loss(object):
                     self.focalloss(heat_maps_br,heat_maps_br_gt)) * 0.5
         
    
-                     
          ######offsets
         offsets_tl = outpus[4] 
         offsets_br = outpus[5]
@@ -112,9 +122,8 @@ class mul_task_loss(object):
         embeddings_br = outpus[3]
         tags_tl = tranpose_and_gather_feat(embeddings_tl,tl_tags) 
         tags_br = tranpose_and_gather_feat(embeddings_br,br_tags) 
-        # tag loss
+            
         pull_loss, push_loss = self.ae_loss(tags_tl,tags_br,masks)
-          
 
         loss = (focalloss + pull_loss + push_loss + offsets_loss) / len(heat_maps_tl)
         
