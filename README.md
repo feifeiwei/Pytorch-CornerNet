@@ -1,4 +1,4 @@
-# Pytorch-CornerNet.    [still in progress]
+# Pytorch-CornerNet.    [deprecated]
 
 Minimal PyTorch implementation of CornerNet
 
